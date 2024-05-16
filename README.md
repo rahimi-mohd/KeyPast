@@ -10,6 +10,7 @@ Inspired by keepassxc
 TODO:
 1. New page for all password
 2. Login page
+3. User registration page
 3. Separate logic code & cleanup
 4. Use base.html
 5. Use hash password (Miguel)

@@ -1,66 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    {% if title %}
-    <title>{{ title }}</title>
-    {% else %}
-    <title>KeyPast</title>
-    {% endif %}
-  </head>
+{% extends "base.html" %} {% block main %}
+<h2>Welcome, {{ current_user.username}}</h2>
 
-  <body>
-    <div>
-      <h1>KeyPass</h1>
-      <a href="{{ url_for('index') }}">Home</a>
-      <a href="#">Upcoming</a>
-    </div>
+<form action="" method="post" novalidate>
+  {{ form.hidden_tag() }}
 
-    <hr />
+  <p>
+    {{ form.app_name.label }} {{ form.app_name(size=32) }} <br />
+    {% for err in form.app_name.errors %}
+    <span style="color: red">[{{ err }}]</span>
+    {% endfor %}
+  </p>
 
-    <!-- flash message -->
-    {% with messages = get_flashed_messages() %} {% if messages %}
-    <ul>
-      {% for msg in messages %}
-      <li>{{ msg }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %} {% endwith %}
+  <p>
+    {{ form.username.label }} {{ form.username(size=32) }} <br />
+    {% for err in form.username.errors %}
+    <span style="color: red">[{{ err }}]</span>
+    {% endfor %}
+  </p>
 
-    <form action="" method="post" novalidate>
-      {{ form.hidden_tag() }}
+  <p>
+    {{ form.characters.label }} {{ form.characters(size=32) }} <br />
+    {% for err in form.characters.errors %}
+    <span style="color: red">[{{ err }}]</span>
+    {% endfor %}
+  </p>
 
-      <p>
-        {{ form.app_name.label }} {{ form.app_name(size=32) }} <br />
-        {% for err in form.app_name.errors %}
-        <span style="color: red">[{{ err }}]</span>
-        {% endfor %}
-      </p>
+  <p>
+    {{ form.url.label }} {{ form.url(size=32) }} <br />
+    {% for err in form.url.errors %}
+    <span style="color: red">[{{ err }}]</span>
+    {% endfor %}
+  </p>
 
-      <p>
-        {{ form.username.label }} {{ form.username(size=32) }} <br />
-        {% for err in form.username.errors %}
-        <span style="color: red">[{{ err }}]</span>
-        {% endfor %}
-      </p>
+  {{ form.remember() }} {{ form.remember.label() }} <br />
+  {{ form.generate() }}
+</form>
 
-      <p>
-        {{ form.characters.label }} {{ form.characters(size=32) }} <br />
-        {% for err in form.characters.errors %}
-        <span style="color: red">[{{ err }}]</span>
-        {% endfor %}
-      </p>
-
-      <p>
-        {{ form.url.label }} {{ form.url(size=32) }} <br />
-        {% for err in form.url.errors %}
-        <span style="color: red">[{{ err }}]</span>
-        {% endfor %}
-      </p>
-
-      {{ form.remember() }} {{ form.remember.label() }} <br />
-      {{ form.generate() }}
-    </form>
-  </body>
-</html>
+{% endblock main %}
